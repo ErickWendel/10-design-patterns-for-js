@@ -1,139 +1,66 @@
-import blessed from 'blessed'
-import contrib from 'blessed-contrib'
+import Layout from "./layout.js"
 
 export default class View {
-    #screen
-    #layout
-    #input
+    #components
+    #headers = []
+    #firstRender = true
+
     #onSearch = () => { }
-    #onClear = () => { }
+
     constructor() { }
 
     configureOnClearClick(onClear) {
-        this.#onClear = onClear
     }
 
     configureOnSearchClick(onSearch) {
-        this.#onSearch = onSearch
-    }
-
-    #baseComponent() {
-        return {
-            border: 'line',
-            mouse: true,
-            keys: true,
-            top: 0,
-            scrollboard: {
-                ch: ' ',
-                inverse: true
-            },
-            tags: true
-        }
-    }
-
-    setScreen({ title }) {
-        this.#screen = blessed.screen({
-            smartCSR: true,
-            title
-        })
-
-        this.#screen.key(['escape', 'q', 'C-c'], () => process.exit(0))
-
-        return this
-    }
-
-    setLayoutComponent() {
-        this.#layout = blessed.layout({
-            parent: this.#screen,
-            width: '100%',
-            height: '100%',
-        })
-
-        return this
-    }
-
-    setSearchComponent(onEnterPressed) {
-        const input = blessed.textarea({
-            parent: this.#screen,
-            bottom: 2,
-            height: '15%',
-            inputOnFocus: true,
-            padding: {
-                top: 1,
-                left: 2
-            },
-            style: {
-                fg: '#f6f6f6',
-                bg: '#353535'
+        this.#onSearch = (input) => {
+            return () => {
+                const message = input.getValue().trim()
+                onSearch(message)
+                input.clearValue()
+                input.focus()
             }
-        })
-
-        input.key('enter', onEnterPressed)
-        this.#input = input
-
-        return this
-
-    }
-
-    setTable(template) {
-        const columnWidth = template.data[0].map(header => String(header).length + 10)
-        const table = contrib.table(
-            {
-                ...this.#baseComponent(),
-                parent: this.#layout,
-                keys: true,
-                fg: 'white',
-                selectedFg: 'white',
-                selectedBg: 'blue',
-                interactive: true,
-                label: 'Users',
-                width: '100%',
-                height: '75%',
-                bottom: 1,
-                border: { type: "line", fg: "cyan" },
-                columnSpacing: 10,
-                columnWidth
-            })
-
-        table.focus()
-        table.setData({
-            headers: template.headers,
-            data: template.data
-        })
-
-        return this
-    }
-
-    build() {
-        const components = {
-            screen: this.#screen,
-            input: this.#input,
         }
-
-        return components
     }
 
     #prepareData(data) {
+        if (!data.length) {
+            return {
+                headers: this.#headers,
+                data: []
+            }
+        }
+
+        this.#headers = Object.keys(data[0]).slice(0, 3)
         return {
-            headers: Object.keys(data[0]).slice(0, 3),
+            headers: this.#headers,
             data: data.map(item => Object.values(item).slice(0, 3))
         }
     }
 
-    render(data) {
-        const that = this;
+    #updateTable(data) {
         const template = this.#prepareData(data)
-        const components = this.setScreen({ title: 'HackerChat - Erick Wendel' })
+        this.#components.table.setData({
+            headers: template.headers,
+            data: template.data
+        })
+    }
+
+    render(data) {
+        if (!this.#firstRender) {
+            this.#updateTable(data);
+            return;
+        }
+
+        const template = this.#prepareData(data)
+        const layout = new Layout()
+        this.#components = layout
+            .setScreen({ title: 'Design Patterns with Erick Wendel' })
             .setLayoutComponent()
-            .setSearchComponent(function () {
-                const message = this.getValue()
-                that.#onSearch(message)
-                this.clearValue()
-            })
+            .setSearchComponent(this.#onSearch)
             .setTable(template)
             .build()
 
-        components.input.focus()
-        components.screen.render()
+        this.#firstRender = false
     }
 }
