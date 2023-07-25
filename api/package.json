@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2"
+  },
+  "type": "module",
+  "engines": {
+    "node": "v20.5.0"
+  },
+  "name": "api",
+  "version": "0.0.1",
+  "main": "api.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node --watch api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
