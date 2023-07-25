@@ -1,7 +1,7 @@
 import blessed from 'blessed'
 import contrib from 'blessed-contrib'
 
-export default class Layout {
+export default class LayoutBuilder {
     #screen
     #layout
     #input

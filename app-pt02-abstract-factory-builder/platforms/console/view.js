@@ -1,4 +1,4 @@
-import Layout from "./layout.js"
+import LayoutBuilder from "./layoutBuilder.js"
 
 export default class View {
     #components
@@ -53,7 +53,8 @@ export default class View {
         }
 
         const template = this.#prepareData(data)
-        const layout = new Layout()
+        const layout = new LayoutBuilder()
+
         this.#components = layout
             .setScreen({ title: 'Design Patterns with Erick Wendel' })
             .setLayoutComponent()
