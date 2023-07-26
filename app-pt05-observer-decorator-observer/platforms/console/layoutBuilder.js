@@ -84,10 +84,7 @@ export default class LayoutBuilder {
                 columnWidth
             })
 
-        this.#table.setData({
-            headers: template.headers,
-            data: template.data
-        })
+        this.#table.setData(template)
 
         return this
     }

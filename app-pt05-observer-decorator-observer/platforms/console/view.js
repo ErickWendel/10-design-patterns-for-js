@@ -4,6 +4,7 @@ export default class View {
     #components
     #headers = []
     #firstRender = true
+    #tableData = []
 
     #onSearch = () => { }
 
@@ -30,29 +31,44 @@ export default class View {
                 data: []
             }
         }
+        if (!this.#headers.length) {
+            this.#headers = Object.keys(data[0]).slice(0, 3)
+        }
 
-        this.#headers = Object.keys(data[0]).slice(0, 3)
         return {
             headers: this.#headers,
             data: data.map(item => Object.values(item).slice(0, 3))
         }
     }
 
-    #updateTable(data) {
+    #updateTable({ data = [], cleanFirst = false }) {
         const template = this.#prepareData(data)
+        if (cleanFirst) this.#tableData = []
+
+        this.#tableData.push(...template.data)
+
         this.#components.table.setData({
             headers: template.headers,
-            data: template.data
+            data: this.#tableData
         })
+        this.#components.screen.render()
     }
 
     render(data) {
+        const isArray = Array.isArray(data)
+        const items = isArray ? data : [data]
+
         if (!this.#firstRender) {
-            this.#updateTable(data);
+            this.#updateTable({
+                data: items,
+                cleanFirst: isArray
+            });
             return;
         }
 
-        const template = this.#prepareData(data)
+        const template = this.#prepareData(items)
+        this.#tableData.push(...template.data)
+
         const layout = new LayoutBuilder()
 
         this.#components = layout
