@@ -42,7 +42,7 @@ createServer(async (req, res) => {
             vehicle: faker.vehicle.model(),
         }
         res.write(JSON.stringify(data).concat('\n'))
-        // await setTimeout(100)
+        await setTimeout(100)
     }
 
     // Set the response headers and send the data as JSON
