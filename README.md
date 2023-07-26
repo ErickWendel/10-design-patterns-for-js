@@ -44,17 +44,20 @@ This talk will cover the following topics:
         - ORMs
 
     Tip #6 - FluentAPI
+        - when order matters
 
-    Design patterns for testing
     Tip #7 Test Data Builder & Object Mother
+        Design patterns for testing
 
     Some of the tests you probably is using
     Tip #8 - Observer - RxJS + EventEmitter
+        browsers don't have the eventEmitter class
+        eventEmitter is a observer
 
     Decorator
     Tip #9 - TypeScript Decorators or APMs
 
-    Tip #10 - Async Iterator
+    Tip #10 - Async Iterator - on demand processing
 
 - How to choose a design pattern?
 
@@ -70,3 +73,6 @@ Projeto
     - click on a button (blessed), send analytics (Observer)
     - query data on demand (Async Iterator + Fluent API)
     - log execution time and send analytics (Decorator)
+
+[javascript-performance-api-in-10-minutes-10b5883b7e79](https://javascript.plainenglish.io/javascript-performance-api-in-10-minutes-10b5883b7e79)
+[js-performance-api](https://www.digitalocean.com/community/tutorials/js-js-performance-api)
