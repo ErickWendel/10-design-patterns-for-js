@@ -26,7 +26,7 @@ export default class FetchResponseDataBuilder {
     withStatus404() {
         this.#responseData = {
             ...this.#responseData,
-            status: 500,
+            status: 404,
             statusText: 'Not Found',
             text: () => Promise.resolve('')
         }

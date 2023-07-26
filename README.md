@@ -88,36 +88,13 @@ breaking news: new requirement from the PM
         - not available yet in JavaScript but is x years been working
         - decorator is a pattern, @ is just a syntax sugar
 
-    - #10
-    split responsibilities into different files
-    Tip #1 - N-Layers
-        problem 1: how to test it? we have window, filesystem and timers
+    - #10 - Async Iterator - on demand processing
+        - sometimes you don't actually need to wait for the full response
+        - can plot data on demand
+        refactoring
+            views
 
-    Tip #2 - Depency Injection
-
-    Tip #3 - Factory
-
-    Top #4 - Abstract Factory
-        - Use ESM - Isomorphic JS
-
-    Tip #5 - Builder
-        - ORMs
-
-    Tip #6 - FluentAPI
-        - when order matters
-
-    Tip #7 Test Data Builder & Object Mother
-        Design patterns for testing
-
-    Some of the tests you probably is using
-    Tip #8 - Observer - RxJS + EventEmitter
-        browsers don't have the eventEmitter class
-        eventEmitter is a observer
-
-    Decorator
-    Tip #9 - TypeScript Decorators or APMs
-
-    Tip #10 - Async Iterator - on demand processing
+--
 
 - How to choose a design pattern?
 
