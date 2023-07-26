@@ -1,6 +1,7 @@
 import { createServer } from 'node:http'
 import { faker } from '@faker-js/faker'
 import { setTimeout } from 'node:timers/promises'
+import { once } from 'node:events'
 createServer(async (req, res) => {
     // Allow CORS for all origins and methods
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -13,6 +14,14 @@ createServer(async (req, res) => {
         return
     }
 
+    if(req.url.includes('analytics') && req.method === 'POST') {
+        const { appId, ...args } = JSON.parse(await once(req, 'data'))
+        console.log(`[app: ${appId}]`, args)
+
+        res.writeHead(200)
+        res.end('ok')
+        return;
+    }
     // get limit and skip from query string or set default values
     const params = new URLSearchParams(req.url.split('?')[1])
     const limit = parseInt(params.get('limit')) || 10 // Default limit is 10
