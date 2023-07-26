@@ -54,8 +54,6 @@ const onload = async () => {
 
     const database = await (await fetch('http://localhost:3000')).text()
     const data = _database = database.split('\n').filter(i => !!i).map(JSON.parse)
-    console.count('_database')
-    console.log('_database', _database, Date.now())
     render(data)
 }
 
