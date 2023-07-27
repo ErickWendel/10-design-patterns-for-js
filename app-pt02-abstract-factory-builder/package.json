@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx browser-sync ."
+    "web": "npx browser-sync .",
+    "cli": "node ui/index.js"
   },
   "keywords": [],
   "author": "",
