@@ -7,7 +7,7 @@ First of all, leave a star in this repo ⭐️
 
 You'd also check out the [slides presentation](https://bit.ly/10-design-patterns-for-js-devs) and soon I'll update this repo with the video presenting all the tips.
 
-<img width="600" alt="Screen Shot 2023-07-27 at 09 34 19" src="https://github.com/ErickWendel/10-design-patterns-for-js/assets/8060102/7ecda117-51a5-475e-84cc-a002336e30be">
+<img width="800" alt="Screen Shot 2023-07-27 at 09 34 19" src="https://github.com/ErickWendel/10-design-patterns-for-js/assets/8060102/7ecda117-51a5-475e-84cc-a002336e30be">
 
 ## Running Examples
 
