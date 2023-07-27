@@ -15,6 +15,7 @@ Choose web or cli to run
 ```sh
 npm run web
 ```
+Go to http://localhost:3001/ui
 
 ### CLI
 ```sh
